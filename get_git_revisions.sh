@@ -1,10 +1,10 @@
 # get_git_revisions.sh <git directory> <n>
-# check out n versions (first n commits) of the git repository in <git directory>
+# check out n versions (last n commits) of the git repository in <git directory>
 # and concatenate all .cpp and .hpp files in a single output file.
 # if n=0, check out all revisions
 
 #creates output file in the directory <git directory>/..
-#output file name has the format FIRST_<n>_VERSIONS_<repo name>_<date>.txt
+#output file name has the format LAST_<n>_VERSIONS_<repo name>_<date>.txt
 
 git_dir=$1
 n=$2 #number of versions to checkout. If 0, check out all versions
@@ -24,7 +24,7 @@ then
 	m=`cat $commits_file | wc -l`
 fi
 
-versions_file=../FIRST_${m}_VERSIONS_`basename $git_dir`_${dat}.txt
+versions_file=../LAST_${m}_VERSIONS_`basename $git_dir`_${dat}.txt
 rm $versions_file
 
 while read p; do
