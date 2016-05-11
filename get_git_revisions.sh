@@ -13,11 +13,18 @@ cd $git_dir
 
 dat=`date | cut -d' ' -f 2,3,4 | tr -d ' ,'`
 
-commits_file=../FIRST_$n_COMMITS_`basename $git_dir`_${dat}.txt
-versions_file=../FIRST_${n}_VERSIONS_`basename $git_dir`_${dat}.txt
-
+commits_file=../COMMITS_LIST_`basename $git_dir`_${dat}.txt
 git rev-list --all --pretty=oneline | cut -f 1 -d' ' > $commits_file
 
+m=$n
+
+if [ $n -eq 0 ]
+then
+	#get total number of revisions
+	m=`cat $commits_file | wc -l`
+fi
+
+versions_file=../FIRST_${m}_VERSIONS_`basename $git_dir`_${dat}.txt
 rm $versions_file
 
 while read p; do
