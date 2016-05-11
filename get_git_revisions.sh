@@ -29,7 +29,7 @@ rm $versions_file
 
 while read p; do
   
-	git checkout $p #get version
+	git checkout -f $p #get version
 	
 	for file in `find . -name \*.cpp -or -name \*.hpp`; do 
 
@@ -45,7 +45,7 @@ while read p; do
 		#if now n=0, exit			
 		if [ $n -eq 0 ]
 		then
-			git checkout origin/master
+			git checkout -f origin/master
 			rm $commits_file
 			exit 0
 		fi	
