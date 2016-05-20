@@ -1,6 +1,7 @@
 # get_git_revisions.sh <git directory> <n>
 # check out n versions (last n commits) of the git repository in <git directory>
-# and concatenate all .cpp and .hpp files in a single output file.
+# and concatenate all .c, .h, .cpp and .hpp files in a single output file.
+# warning: if no .c, .h, .cpp and .hpp files are in the repo, no output file is created
 # if n=0, check out all revisions
 
 #creates output file in the directory <git directory>/..
@@ -31,7 +32,7 @@ while read p; do
   
 	git checkout -f $p #get version
 	
-	for file in `find . -name \*.cpp -or -name \*.hpp`; do 
+	for file in `find . -name \*.cpp -or -name \*.hpp -or -name \*.h -or -name \*.c`; do 
 
 		cat $file >> $versions_file
 
